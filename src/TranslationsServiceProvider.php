@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    larabizcms/larabiz
+ * @package    juzaweb/laravel-translations
  * @author     The Anh Dang
  * @link       https://juzaweb.com
  */
@@ -28,14 +28,17 @@ class TranslationsServiceProvider extends ServiceProvider
             ]
         );
 
-        $this->app[Translation::class]->register("translations_package", [
-            'type' => 'package',
-            'key' => 'translations_package',
-            'namespace' => 'translation',
-            'lang_path' => __DIR__ . '/resources/lang',
-            'src_path' => __DIR__,
-            'publish_path' => resource_path('lang/vendor/translation'),
-        ]);
+        $this->app[Translation::class]->register(
+            "translations_package",
+            [
+                'type' => 'package',
+                'key' => 'translations_package',
+                'namespace' => 'translation',
+                'lang_path' => __DIR__ . '/resources/lang',
+                'src_path' => __DIR__,
+                'publish_path' => resource_path('lang/vendor/translation'),
+            ]
+        );
     }
 
     public function register()

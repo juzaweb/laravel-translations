@@ -2,7 +2,7 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    larabizcms/larabiz
+ * @package    juzaweb/laravel-translations
  * @author     The Anh Dang
  * @link       https://juzaweb.com
  */
