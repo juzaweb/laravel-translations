@@ -23,18 +23,18 @@ enum TranslateHistoryStatus: string
     public function all(): array
     {
         return [
-            self::PENDING->value => __('Pending'),
-            self::SUCCESS->value => __('Success'),
-            self::FAILED->value => __('Failed'),
+            self::PENDING->value => __('translation::translation.pending'),
+            self::SUCCESS->value => __('translation::translation.success'),
+            self::FAILED->value => __('translation::translation.failed'),
         ];
     }
 
     public function label(): string
     {
         return match ($this) {
-            self::PENDING => __('Pending'),
-            self::SUCCESS => __('Success'),
-            self::FAILED => __('Failed'),
+            self::PENDING => __('translation::translation.pending'),
+            self::SUCCESS => __('translation::translation.success'),
+            self::FAILED => __('translation::translation.failed'),
         };
     }
 

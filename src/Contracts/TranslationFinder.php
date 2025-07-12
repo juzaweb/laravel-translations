@@ -25,7 +25,7 @@ interface TranslationFinder
      * @param string $locale
      * @return array
      */
-    public function find(string $path, string $locale = 'en'): array;
+    public function find(string $path, string $locale = 'en', ?string $replace = null): array;
 
     /**
      * Export translations for a specific module.

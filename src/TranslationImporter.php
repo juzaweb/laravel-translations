@@ -24,7 +24,8 @@ class TranslationImporter
     public function __construct(
         protected Collection $module,
         protected TranslationFinder $translationFinder,
-        protected Translation $translationManager
+        protected Translation $translationManager,
+        protected ?string $replace = null
     ) {
     }
 
@@ -74,7 +75,7 @@ class TranslationImporter
             return 0;
         }
 
-        $results = $this->translationFinder->find($srcPath);
+        $results = $this->translationFinder->find($srcPath, replace: $this->replace);
 
         // if ($this->module->get('type') != 'cms') {
         //     $results = collect($results)->filter(fn ($item) => $item['namespace'] != 'cms')->toArray();

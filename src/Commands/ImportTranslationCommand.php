@@ -20,7 +20,8 @@ class ImportTranslationCommand extends Command
         }
 
         foreach ($modules as $module => $options) {
-            $import = app(TranslationFinder::class)->import($module)->run();
+            $replace = $this->option('replace') ? "{$options['namespace']}::translation" : null;
+            $import = app(TranslationFinder::class)->import($module, $replace)->run();
 
             $this->info("Imported {$import} rows from {$module}");
         }
@@ -28,10 +29,16 @@ class ImportTranslationCommand extends Command
         return static::SUCCESS;
     }
 
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
     protected function getOptions(): array
     {
         return [
             ['module', 'm', InputOption::VALUE_OPTIONAL, 'The module to import', null],
+            ['replace', 'r', InputOption::VALUE_NONE, 'Replace existing translations'],
         ];
     }
 }
