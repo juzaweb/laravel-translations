@@ -13,8 +13,9 @@
         "juzaweb/laravel-translation-loader": "^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^11.0.1",
-        "orchestra/testbench": "^9.14"
+        "larabizcms/for-dev": "^1.0",
+        "orchestra/testbench": "^9.14",
+        "phpunit/phpunit": "^11.0.1"
     },
     "autoload": {
         "psr-4": {
