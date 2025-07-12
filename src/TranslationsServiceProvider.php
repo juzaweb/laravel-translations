@@ -39,6 +39,9 @@ class TranslationsServiceProvider extends ServiceProvider
                 'publish_path' => resource_path('lang/vendor/translation'),
             ]
         );
+
+        $this->app->singleton('translatable.locales', Locales::class);
+        $this->app->singleton(\Astrotomic\Translatable\Locales::class, Locales::class);
     }
 
     public function register()

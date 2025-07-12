@@ -23,10 +23,14 @@ return new class extends Migration
             [
                 'code' => 'en',
                 'name' => 'English',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'code' => 'vi',
                 'name' => 'Vietnamese',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }
