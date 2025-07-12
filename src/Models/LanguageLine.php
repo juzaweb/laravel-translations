@@ -2,9 +2,9 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    larabizcom/larabiz
+ * @package    juzaweb/laravel-translations
  * @author     The Anh Dang
- * @link       https://larabiz.com
+ * @link       https://juzaweb.com
  * @license    GNU V2
  */
 

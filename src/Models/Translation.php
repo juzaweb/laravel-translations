@@ -3,8 +3,8 @@
 namespace Juzaweb\Translations\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Core\Models\Model;
 
 class Translation extends Model
 {

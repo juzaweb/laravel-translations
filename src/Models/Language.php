@@ -2,9 +2,9 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    larabizcom/larabiz
+ * @package    juzaweb/laravel-translations
  * @author     The Anh Dang
- * @link       https://larabiz.com/cms
+ * @link       https://juzaweb.com
  * @license    GNU V2
  */
 
@@ -12,7 +12,7 @@ namespace Juzaweb\Translations\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Juzaweb\Core\Models\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
