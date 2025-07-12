@@ -32,8 +32,8 @@ class TranslationsServiceProvider extends ServiceProvider
             'type' => 'package',
             'key' => 'translations_package',
             'namespace' => 'translation',
-            'lang_path' => __DIR__ . '/../../resources/lang',
-            'src_path' => __DIR__ . '/../..',
+            'lang_path' => __DIR__ . '/resources/lang',
+            'src_path' => __DIR__,
             'publish_path' => resource_path('lang/vendor/translation'),
         ]);
     }
