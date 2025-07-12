@@ -11,7 +11,7 @@
 namespace Juzaweb\Translations\Commands;
 
 use Illuminate\Console\Command;
-use LarabizCMS\Core\Translations\Contracts\Translation;
+use Juzaweb\Translations\Contracts\Translation;
 use Juzaweb\Translations\Contracts\TranslationFinder;
 use Symfony\Component\Console\Input\InputOption;
 

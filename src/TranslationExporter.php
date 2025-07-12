@@ -13,7 +13,7 @@ namespace Juzaweb\Translations;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use LarabizCMS\Core\Models\Translation;
+use Juzaweb\Translations\Models\Translation;
 
 class TranslationExporter
 {

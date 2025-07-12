@@ -45,11 +45,6 @@ class Language extends Model
         return self::whereCode($code)->exists();
     }
 
-    public static function setDefault(string $code): void
-    {
-        setting()->set('language', $code);
-    }
-
     public static function languages(): Collection
     {
         return self::cacheFor(config('core.query_cache.lifetime'))
@@ -57,20 +52,8 @@ class Language extends Model
             ->keyBy('code');
     }
 
-    public static function default(): ?self
-    {
-        return self::cacheFor(config('core.query_cache.lifetime'))
-            ->where(['code' => setting('language', config('app.locale'))])
-            ->first();
-    }
-
     public function scopeIsDefault(Builder $query): Builder
     {
         return $query->where(['default' => true]);
-    }
-
-    public function isDefault(): bool
-    {
-        return $this->code == setting('language', config('app.locale'));
     }
 }
