@@ -22,7 +22,7 @@ class ExportTranslationCommand extends Command
     public function handle(): int
     {
         if ($module = $this->option('module')) {
-            $modules = [$module];
+            $modules = [$module => app(Translation::class)->find($module)];
         } else {
             $modules = app(Translation::class)->modules();
         }
