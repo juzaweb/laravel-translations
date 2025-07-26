@@ -12,6 +12,7 @@ namespace Juzaweb\Translations\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
 class Translation extends Model
@@ -30,7 +31,7 @@ class Translation extends Model
         'object_key',
     ];
 
-    public function sameKeyTranslations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function sameKeyTranslations(): HasMany
     {
         return $this->hasMany(static::class, 'key', 'key');
     }
