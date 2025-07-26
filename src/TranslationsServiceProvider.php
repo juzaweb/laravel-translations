@@ -4,7 +4,7 @@
  *
  * @package    juzaweb/laravel-translations
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://cms.juzaweb.com
  */
 
 namespace Juzaweb\Translations;
@@ -27,6 +27,18 @@ class TranslationsServiceProvider extends ServiceProvider
                 \Juzaweb\Translations\Commands\ImportTranslationCommand::class,
             ]
         );
+
+        // $this->app[Translation::class]->register(
+        //     "laravel",
+        //     [
+        //         'type' => 'laravel',
+        //         'key' => 'laravel',
+        //         'namespace' => 'laravel',
+        //         'lang_path' => resource_path('lang'),
+        //         'src_path' => app_path(),
+        //         'publish_path' => resource_path('lang'),
+        //     ]
+        // );
 
         $this->app[Translation::class]->register(
             "translations_package",

@@ -3,7 +3,7 @@
  * LARABIZ CMS - Full SPA Laravel CMS
  *
  * @package    larabizcom/larabiz
- * @author     Larabiz Team <admin@larabiz.com>
+ * @author     Juzaweb Team <admin@juzaweb.com>
  * @link       https://larabiz.com
  * @license    MIT
  */

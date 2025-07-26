@@ -4,5 +4,5 @@
  *
  * @package    juzaweb/laravel-translations
  * @author     The Anh Dang
- * @link       https://juzaweb.com
+ * @link       https://cms.juzaweb.com
  */
