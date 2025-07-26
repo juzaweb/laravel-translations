@@ -9,15 +9,18 @@
 
 namespace Juzaweb\Translations\Traits;
 
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Juzaweb\Translations\Contracts\Translator;
 use Juzaweb\Translations\Enums\TranslateHistoryStatus;
+use Juzaweb\Translations\Exceptions\TranslationDoesNotExistException;
 use Juzaweb\Translations\Exceptions\TranslationExistException;
 use Juzaweb\Translations\Models\TranslateHistory;
-use Juzaweb\Translations\Translater;
+use Throwable;
 
 /**
  * @property array $translatedAttributes
@@ -89,7 +92,7 @@ trait Translatable
         $translateHistory = $this->getTranslateHistory($locale);
 
         if ($translation === null) {
-            throw \Juzaweb\Translations\Exceptions\TranslationDoesNotExistException::make($source);
+            throw TranslationDoesNotExistException::make($source);
         }
 
         try {
@@ -107,22 +110,22 @@ trait Translatable
                     continue;
                 }
 
-                $translated[$translatedAttribute] = app(Translater::class)->translate(
+                $translated[$translatedAttribute] = app(Translator::class)->translate(
                     $translation->{$translatedAttribute},
                     $source,
                     $locale,
-                    isset($this->autoTranslateFormats[$translatedAttribute])
-                    && $this->autoTranslateFormats[$translatedAttribute] === 'html'
+                    isset($this->translatedAttributeFormats[$translatedAttribute])
+                    && $this->translatedAttributeFormats[$translatedAttribute] === 'html'
                 );
             }
-        } catch (\GuzzleHttp\Exception\ConnectException $e) {
+        } catch (ConnectException $e) {
             $translateHistory?->update([
                 'status' => TranslateHistoryStatus::FAILED,
                 'error' => get_error_by_exception($e),
             ]);
 
             return false;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $translateHistory?->update([
                 'status' => TranslateHistoryStatus::FAILED,
                 'error' => get_error_by_exception($e),

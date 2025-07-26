@@ -12,10 +12,8 @@ namespace Juzaweb\Translations\Exceptions;
 
 class TranslationExistException extends TranslationException
 {
-    public static function make(): static
+    public static function make(string $locale): static
     {
-        return new static(
-            __('The translation already exists.')
-        );
+        return new static("The translation {$locale} already exists.");
     }
 }
