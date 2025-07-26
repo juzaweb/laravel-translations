@@ -11,6 +11,8 @@
 namespace Juzaweb\Translations\Commands;
 
 use Illuminate\Console\Command;
+use Juzaweb\Translations\Contracts\Translatable;
+use Juzaweb\Translations\Jobs\ModelTranslateJob;
 use Juzaweb\Translations\Models\Language;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -21,12 +23,10 @@ class ModelTranslateCommand extends Command
     public function handle(): int
     {
         $source = $this->option('source') ?? config('translatable.fallback_locale');
-        if ($this->option('target')) {
-            $targets = explode(',', $this->option('target'));
+        if ($target = $this->option('target')) {
+            $targets = explode(',', $target);
         } else {
-            $targets = Language::languages()->keys()->filter(
-                fn ($locale) => $locale !== config('translatable.fallback_locale')
-            )->toArray();
+            $targets = Language::codesWithoutFallback();
         }
 
         $model = $this->argument('model');
@@ -37,13 +37,18 @@ class ModelTranslateCommand extends Command
         }
 
         foreach ($targets as $target) {
+            /** @var class-string<Translatable> $model */
             $model::notTranslatedIn($target)->chunkById(
                 100,
                 function ($pages) use ($target, $source) {
                     foreach ($pages as $page) {
-                        $newPage = $page->translateTo($target);
+                        ModelTranslateJob::dispatch(
+                            $page,
+                            $source,
+                            $target
+                        );
 
-                        $this->info("Translated page ID {$page->id} from {$source} to {$target}");
+                        $this->info("Translating page ID {$page->id} from {$source} to {$target}");
                     }
                 }
             );

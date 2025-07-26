@@ -41,6 +41,18 @@ class Language extends Model
             ->keyBy('code');
     }
 
+    public static function codes(): array
+    {
+        return static::languages()->keys()->toArray();
+    }
+
+    public static function codesWithoutFallback(): array
+    {
+        return static::languages()->keys()->filter(
+            fn ($locale) => $locale !== config('translatable.fallback_locale')
+        )->toArray();
+    }
+
     public static function existsCode(string $code): bool
     {
         return self::whereCode($code)->exists();
