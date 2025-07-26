@@ -12,9 +12,12 @@ namespace Juzaweb\Translations\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Juzaweb\QueryCache\QueryCacheable;
 
 class Language extends Model
 {
+    use QueryCacheable;
+
     protected $keyType = 'string';
 
     protected $primaryKey = 'code';

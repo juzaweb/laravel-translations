@@ -2,18 +2,17 @@
 /**
  * JUZAWEB CMS - Laravel CMS for Your Project
  *
- * @package    juzaweb/laravel-translations
+ * @package    juzaweb/cms
  * @author     The Anh Dang
  * @link       https://cms.juzaweb.com
+ * @license    GNU V2
  */
 
 namespace Juzaweb\Translations\Contracts;
 
-interface Translater
+interface Translator
 {
-    public function driver(string $driver): static;
-
-    public function translate(string $text, string $source, string $target, bool $isHTML = false): string;
+    public function translate(string $text, string $source, string $target, bool $isHTML = false): ?string;
 
     public function withProxy(string|array $proxy): static;
 }

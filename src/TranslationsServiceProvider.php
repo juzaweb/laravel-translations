@@ -10,9 +10,12 @@
 namespace Juzaweb\Translations;
 
 use Illuminate\Support\ServiceProvider;
+use Juzaweb\Translations\Commands\ExportTranslationCommand;
+use Juzaweb\Translations\Commands\ImportTranslationCommand;
+use Juzaweb\Translations\Commands\MakeLanguageCommand;
 use Juzaweb\Translations\Contracts\Translation;
 use Juzaweb\Translations\Contracts\TranslationFinder as TranslationFinderContract;
-use Juzaweb\Translations\TranslationFinder;
+use Juzaweb\Translations\Contracts\Translator;
 
 class TranslationsServiceProvider extends ServiceProvider
 {
@@ -22,9 +25,9 @@ class TranslationsServiceProvider extends ServiceProvider
 
         $this->commands(
             [
-                \Juzaweb\Translations\Commands\MakeLanguageCommand::class,
-                \Juzaweb\Translations\Commands\ExportTranslationCommand::class,
-                \Juzaweb\Translations\Commands\ImportTranslationCommand::class,
+                MakeLanguageCommand::class,
+                ExportTranslationCommand::class,
+                ImportTranslationCommand::class,
             ]
         );
 
@@ -58,6 +61,16 @@ class TranslationsServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/locales.php',
+            'locales'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/laravel-translation.php',
+            'laravel-translation'
+        );
+
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'translation');
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'translation');
@@ -78,11 +91,28 @@ class TranslationsServiceProvider extends ServiceProvider
             }
         );
 
+        $this->app->bind(
+            Translator::class,
+            function ($app) {
+                $driver = $app['config']->get('laravel-translation.translator.driver', 'google');
+
+                return new ($app['config']->get("laravel-translation.translator.drivers.{$driver}")['class']);
+            }
+        );
+
         $this->publishes(
             [
                 __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/translation'),
             ],
             'translations_lang'
+        );
+
+        $this->publishes(
+            [
+                __DIR__ . '/../config/laravel-translation.php' => config_path('laravel-translation.php'),
+                __DIR__ . '/../config/locales.php' => config_path('locales.php'),
+            ],
+            'translations_config'
         );
     }
 }
