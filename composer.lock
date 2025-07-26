@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "550961e0825ab8d2496f165e646315ff",
+    "content-hash": "7e46947887ccae216b7b844aad4fe8ae",
     "packages": [
         {
             "name": "astrotomic/laravel-translatable",
@@ -90,6 +90,68 @@
                 }
             ],
             "time": "2025-07-09T14:05:02+00:00"
+        },
+        {
+            "name": "awobaz/compoships",
+            "version": "2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/topclaudy/compoships.git",
+                "reference": "49ef79d912201c8649651d63b5682afae092502e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/topclaudy/compoships/zipball/49ef79d912201c8649651d63b5682afae092502e",
+                "reference": "49ef79d912201c8649651d63b5682afae092502e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">=5.6 <13.0"
+            },
+            "require-dev": {
+                "ext-sqlite3": "*",
+                "fakerphp/faker": "^1.18",
+                "phpunit/phpunit": "^6.0|^8.0|^9.0|^10.0|^11.0"
+            },
+            "suggest": {
+                "awobaz/blade-active": "Blade directives for the Laravel 'Active' package",
+                "awobaz/eloquent-auto-append": "Automatically append accessors to model serialization",
+                "awobaz/eloquent-mutators": "Reusable mutators (getters/setters) for Laravel 5's Eloquent",
+                "awobaz/syntactic": "Syntactic sugar for named and indexed parameters call."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Awobaz\\Compoships\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Claudin J. Daniel",
+                    "email": "cdaniel@awobaz.com"
+                }
+            ],
+            "description": "Laravel relationships with support for composite/multiple keys",
+            "keywords": [
+                "laravel",
+                "laravel composite keys",
+                "laravel relationships"
+            ],
+            "support": {
+                "issues": "https://github.com/topclaudy/compoships/issues",
+                "source": "https://github.com/topclaudy/compoships/tree/2.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/awobaz",
+                    "type": "custom"
+                }
+            ],
+            "time": "2025-02-24T15:12:08+00:00"
         },
         {
             "name": "brick/math",
@@ -1138,6 +1200,64 @@
                 }
             ],
             "time": "2025-02-03T10:55:03+00:00"
+        },
+        {
+            "name": "juzaweb/laravel-query-cache",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/juzaweb/laravel-query-cache.git",
+                "reference": "8893f8c60e315663c2f239cdad0d6af5fdb5660f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/juzaweb/laravel-query-cache/zipball/8893f8c60e315663c2f239cdad0d6af5fdb5660f",
+                "reference": "8893f8c60e315663c2f239cdad0d6af5fdb5660f",
+                "shasum": ""
+            },
+            "require": {
+                "awobaz/compoships": "^2.4",
+                "illuminate/database": "^10.5|^11.33|^12.0",
+                "illuminate/support": "^10.5|^11.33|^12.0"
+            },
+            "require-dev": {
+                "chelout/laravel-relationship-events": "^1.5|^2.0|^3.0",
+                "laravel/legacy-factories": "^1.4",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^8.1.1|^9|^10.0",
+                "phpunit/phpunit": "^9.5.25|^10|^11"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Juzaweb\\QueryCache\\QueryCacheServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Juzaweb\\QueryCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Adding cache on your Laravel Eloquent queries' results is now a breeze.",
+            "keywords": [
+                "caching",
+                "eloquent",
+                "laravel",
+                "query",
+                "remember",
+                "sql"
+            ],
+            "support": {
+                "issues": "https://github.com/juzaweb/laravel-query-cache/issues",
+                "source": "https://github.com/juzaweb/laravel-query-cache/tree/1.0.0"
+            },
+            "time": "2025-05-20T07:28:07+00:00"
         },
         {
             "name": "juzaweb/laravel-translation-loader",
