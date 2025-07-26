@@ -11,6 +11,7 @@
 namespace Juzaweb\Translations\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Language extends Model
 {
@@ -24,6 +25,18 @@ class Language extends Model
         'code',
         'name',
     ];
+
+    public static function languages(): Collection
+    {
+        return self::cacheFor(config('core.query_cache.lifetime'))
+            ->get()
+            ->map(function ($item) {
+                $item->regional = config("locales.{$item->code}.regional");
+                $item->country = explode('_', strtolower($item->regional))[1] ?? null;
+                return $item;
+            })
+            ->keyBy('code');
+    }
 
     public static function existsCode(string $code): bool
     {
