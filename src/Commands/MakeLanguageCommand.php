@@ -39,7 +39,7 @@ class MakeLanguageCommand extends Command
             return Command::FAILURE;
         }
 
-        Language::create(['code' => $code, 'name' => $locale['name'], 'default' => $this->option('default')]);
+        Language::create(['code' => $code, 'name' => $locale['name']]);
 
         return Command::SUCCESS;
     }
@@ -48,13 +48,6 @@ class MakeLanguageCommand extends Command
     {
         return [
             ['code', InputArgument::OPTIONAL, 'The code of the language'],
-        ];
-    }
-
-    protected function getOptions(): array
-    {
-        return [
-            ['default', 'd', InputOption::VALUE_NONE, 'Set the language as default'],
         ];
     }
 }

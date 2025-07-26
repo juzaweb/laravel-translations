@@ -18,7 +18,7 @@ class GoogleTranslator implements TranslatorContract
 
     public function translate(string $text, string $source, string $target, bool $isHTML = false): ?string
     {
-        $apiKey = config('services.translate.drivers.google.key');
+        $apiKey = config('laravel-translation.translator.drivers.google.key');
 
         $response = Http::throw()->post(
             'https://translation.googleapis.com/language/translate/v2',

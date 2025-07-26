@@ -14,14 +14,14 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Juzaweb\Premium\Translations\Exceptions\TranslationDoesNotExistException;
-use Juzaweb\Premium\Translations\Exceptions\TranslationExistException;
-use Juzaweb\Premium\Translations\Translater;
 use Juzaweb\Translations\Enums\TranslateHistoryStatus;
+use Juzaweb\Translations\Exceptions\TranslationExistException;
 use Juzaweb\Translations\Models\TranslateHistory;
+use Juzaweb\Translations\Translater;
 
 /**
  * @property array $translatedAttributes
+ * @property array $translatedAttributeFormats
  * @method static Builder|static withTranslation(?string $locale = null, ?array $with = null)
  * @method static Builder|static withTranslationAndMedia(?string $locale = null, ?array $with = null)
  * @method static Builder|static translatedIn(?string $locale = null)
@@ -45,11 +45,11 @@ trait Translatable
         return $this->translateHistories()->where('locale', $locale)->first();
     }
 
-    public function scopeWithTranslation(Builder $query, ?string $locale = null, ?array $with = null)
+    public function scopeWithTranslation(Builder $query, ?string $locale = null, ?array $with = null): Builder
     {
         $locale = $locale ?: $this->locale();
 
-        $query->with([
+        return $query->with([
             'translations' => function (Relation $query) use ($locale, $with) {
                 if ($this->useFallback()) {
                     $countryFallbackLocale = $this->getFallbackLocale($locale); // e.g. de-DE => de
@@ -67,13 +67,6 @@ trait Translatable
         ]);
     }
 
-    public function scopeWithTranslationAndMedia(Builder $query, ?string $locale = null, ?array $with = null)
-    {
-        $with = array_merge($with ?? [], ['media']);
-
-        $this->scopeWithTranslation($query, $locale, $with);
-    }
-
     public function getTranslatedFields(): array
     {
         return $this->translatedAttributes ?? [];
@@ -89,14 +82,14 @@ trait Translatable
         );
 
         if (!$options['force'] && $this->hasTranslation($locale)) {
-            throw new TranslationExistException('Translation already exists.');
+            throw TranslationExistException::make($locale);
         }
 
         $translation = $this->translate($source);
         $translateHistory = $this->getTranslateHistory($locale);
 
         if ($translation === null) {
-            throw new TranslationDoesNotExistException("Source {$source} translation does not exist.");
+            throw \Juzaweb\Translations\Exceptions\TranslationDoesNotExistException::make($source);
         }
 
         try {
@@ -108,7 +101,7 @@ trait Translatable
                 }
 
                 if ($translatedAttribute === 'slug'
-                    || Arr::get($this->autoTranslateFormats, $translatedAttribute) == 'slug'
+                    || Arr::get($this->translatedAttributeFormats, $translatedAttribute) == 'slug'
                 ) {
                     $translated[$translatedAttribute] = null;
                     continue;
