@@ -13,6 +13,7 @@ use Illuminate\Support\ServiceProvider;
 use Juzaweb\Translations\Commands\ExportTranslationCommand;
 use Juzaweb\Translations\Commands\ImportTranslationCommand;
 use Juzaweb\Translations\Commands\MakeLanguageCommand;
+use Juzaweb\Translations\Commands\TranslateCommand;
 use Juzaweb\Translations\Contracts\Translation;
 use Juzaweb\Translations\Contracts\TranslationFinder as TranslationFinderContract;
 use Juzaweb\Translations\Contracts\Translator;
@@ -28,6 +29,7 @@ class TranslationsServiceProvider extends ServiceProvider
                 MakeLanguageCommand::class,
                 ExportTranslationCommand::class,
                 ImportTranslationCommand::class,
+                TranslateCommand::class,
             ]
         );
 
