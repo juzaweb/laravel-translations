@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static array|bool|string lookup(string $ip, array|int $fields = null)
+ * @method static bool|string countryCode(string $ip)
  */
 class IP2Location extends Facade
 {

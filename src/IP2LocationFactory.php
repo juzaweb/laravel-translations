@@ -22,7 +22,26 @@ class IP2LocationFactory implements Contracts\IP2Location
         }
     }
 
-    public function lookup(string $ip, array|int $fields = null)
+    /**
+     * Get the country code for the given IP address.
+     *
+     * @param string $ip The IP address to look up.
+     * @return bool|string The country code or false if not found.
+     */
+    public function countryCode(string $ip): bool|string
+    {
+        return $this->lookup($ip, Database::COUNTRY_CODE);
+    }
+
+
+    /**
+     * Lookup the IP address and return the location data.
+     *
+     * @param string $ip The IP address to look up.
+     * @param array|int|null $fields The fields to return, or null for all fields.
+     * @return array|bool|string The location data for the IP address.
+     */
+    public function lookup(string $ip, array|int $fields = null): bool|array|string
     {
         return (new Database($this->dataPath, Database::FILE_IO))->lookup($ip, $fields);
     }

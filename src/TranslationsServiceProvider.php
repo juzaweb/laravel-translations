@@ -10,6 +10,7 @@
 namespace Juzaweb\Translations;
 
 use Illuminate\Support\ServiceProvider;
+use Juzaweb\Translations\Commands\ConvertConfigCountryCommand;
 use Juzaweb\Translations\Commands\ExportTranslationCommand;
 use Juzaweb\Translations\Commands\ImportTranslationCommand;
 use Juzaweb\Translations\Commands\MakeLanguageCommand;
@@ -32,6 +33,7 @@ class TranslationsServiceProvider extends ServiceProvider
                 ImportTranslationCommand::class,
                 TranslateCommand::class,
                 ModelTranslateCommand::class,
+                ConvertConfigCountryCommand::class,
             ]
         );
 
@@ -73,6 +75,11 @@ class TranslationsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/laravel-translation.php',
             'laravel-translation'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/countries.php',
+            'countries'
         );
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
@@ -123,6 +130,7 @@ class TranslationsServiceProvider extends ServiceProvider
             [
                 __DIR__ . '/../config/laravel-translation.php' => config_path('laravel-translation.php'),
                 __DIR__ . '/../config/locales.php' => config_path('locales.php'),
+                __DIR__ . '/../config/countries.php' => config_path('countries.php'),
             ],
             'translations_config'
         );

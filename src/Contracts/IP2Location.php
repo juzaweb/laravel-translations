@@ -12,5 +12,7 @@ namespace Juzaweb\Translations\Contracts;
 
 interface IP2Location
 {
+    public function countryCode(string $ip): bool|string;
+
     public function lookup(string $ip, array|int $fields = null);
 }
