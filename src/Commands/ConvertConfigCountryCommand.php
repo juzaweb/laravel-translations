@@ -30,7 +30,7 @@ class ConvertConfigCountryCommand extends Command
             $config[$lowerCode] = [
                 'name' => $name,
                 'code' => $lowerCode,
-                'locale' => strtolower($row[13]),
+                'language' => strtolower($row[13]),
             ];
         }
 
