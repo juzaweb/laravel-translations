@@ -104,6 +104,14 @@ class TranslationsServiceProvider extends ServiceProvider
             }
         );
 
+        $this->app->singleton(
+            Contracts\IP2Location::class,
+            function ($app) {
+                $dataPath = __DIR__ . '/../database/iplocation/IPV6-COUNTRY.BIN';
+                return new IP2LocationFactory($dataPath);
+            }
+        );
+
         $this->publishes(
             [
                 __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/translation'),

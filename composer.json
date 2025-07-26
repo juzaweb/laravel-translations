@@ -11,7 +11,8 @@
         "php": ">=8.2",
         "astrotomic/laravel-translatable": "^11.13",
         "juzaweb/laravel-query-cache": "^1.0",
-        "juzaweb/laravel-translation-loader": "^2.0"
+        "juzaweb/laravel-translation-loader": "^2.0",
+        "ip2location/ip2location-php": "^9.7"
     },
     "require-dev": {
         "larabizcms/for-dev": "^1.0",
