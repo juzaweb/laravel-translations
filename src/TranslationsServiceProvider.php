@@ -20,12 +20,13 @@ use Juzaweb\Translations\Commands\TranslateViewTextCommand;
 use Juzaweb\Translations\Contracts\Translation;
 use Juzaweb\Translations\Contracts\TranslationFinder as TranslationFinderContract;
 use Juzaweb\Translations\Contracts\Translator;
+use Juzaweb\Translations\Translation as TranslationModel;
 
 class TranslationsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app['config']->set('translation-loader.model', \Juzaweb\Translations\Translation::languageLineModel());
+        $this->app['config']->set('translation-loader.model', TranslationModel::languageLineModel());
 
         $this->commands(
             [
@@ -67,7 +68,7 @@ class TranslationsServiceProvider extends ServiceProvider
         $this->app->singleton(\Astrotomic\Translatable\Locales::class, Locales::class);
     }
 
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(
             __DIR__ . '/../config/locales.php',
