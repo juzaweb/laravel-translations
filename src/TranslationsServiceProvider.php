@@ -16,6 +16,7 @@ use Juzaweb\Translations\Commands\ImportTranslationCommand;
 use Juzaweb\Translations\Commands\MakeLanguageCommand;
 use Juzaweb\Translations\Commands\ModelTranslateCommand;
 use Juzaweb\Translations\Commands\TranslateCommand;
+use Juzaweb\Translations\Commands\TranslateViewTextCommand;
 use Juzaweb\Translations\Contracts\Translation;
 use Juzaweb\Translations\Contracts\TranslationFinder as TranslationFinderContract;
 use Juzaweb\Translations\Contracts\Translator;
@@ -34,6 +35,7 @@ class TranslationsServiceProvider extends ServiceProvider
                 TranslateCommand::class,
                 ModelTranslateCommand::class,
                 ConvertConfigCountryCommand::class,
+                TranslateViewTextCommand::class,
             ]
         );
 
